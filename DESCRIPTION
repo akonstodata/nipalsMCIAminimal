@@ -1,6 +1,6 @@
-Package: nipalsMCIA
-Title: Multiple Co-Inertia Analysis via the NIPALS Method
-Version: 0.99.5
+Package: nipalsMCIAminimal
+Title: Multiple Co-Inertia Analysis via the NIPALS Method (minimal version)
+Version: 0.99.0
 Authors@R: c(
     person("Maximilian", "Mattessich",
             email = "maximilian.mattessich@northwestern.edu",
@@ -16,11 +16,10 @@ Description: Computes Multiple Co-Inertia Analysis (MCIA), a
     using a modification to the Nonlinear Iterative Partial Least Squares
     method (NIPALS) proposed in (Hanafi et. al, 2010). Allows multiple
     options for row- and table-level preprocessing, and speeds up
-    computation of variance explained. Vignettes detail application to
-    bulk- and single cell- multi-omics studies.
+    computation of variance explained. 
 License: GPL-3
-URL: https://github.com/Muunraker/nipalsMCIA
-BugReports: https://github.com/Muunraker/nipalsMCIA/issues
+URL: https://github.com/akonstodata/nipalsMCIA-minimal
+BugReports: https://github.com/akonstodata/nipalsMCIA-minimal/issues
 Depends:
     R (>= 4.2.0)
 Imports:
@@ -31,14 +30,12 @@ Imports:
     graphics,
     grid,
     methods,
-    MultiAssayExperiment,
     pracma,
     rlang,
     RSpectra,
     scales,
     stats
 Suggests:
-    BiocStyle,
     circlize,
     ggpubr,
     KernSmooth,
@@ -47,7 +44,6 @@ Suggests:
     reshape2,
     rmarkdown,
     rpart,
-    Seurat (>= 4.0.0),
     spatstat.explore,
     stringr,
     survival,
@@ -55,8 +51,6 @@ Suggests:
     testthat (>= 3.0.0)
 VignetteBuilder:
     knitr
-biocViews: Software, Clustering, Classification, MultipleComparison,
-    Normalization, Preprocessing, SingleCell
 Encoding: UTF-8
 RoxygenNote: 7.2.3
 Config/testthat/edition: 3

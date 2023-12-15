@@ -73,8 +73,6 @@
 #' \item `metadata` the metadata dataframe supplied with the `metadata`
 #' argument. Note: overrides metadata present in any MAE class object.}
 #' @importFrom graphics par
-#' @importFrom MultiAssayExperiment experiments metadata colData assays
-#' @importClassesFrom MultiAssayExperiment MultiAssayExperiment
 #' @examples
 #'    data(NCI60)
 #'    NIPALS_results <- nipals_multiblock(data_blocks, num_PCs = 10,
@@ -92,31 +90,15 @@ nipals_multiblock <- function(data_blocks, row_format = "samples",
                               metadata = NULL, color_col = NULL,
                               deflationMethod = "block", plots = "all") {
 
-    # Check for input type MAE or list
-    if (is(data_blocks, "MultiAssayExperiment")) {
-        data_blocks_mae <- data_blocks
-
-        data_blocks <- MultiAssayExperiment::assays(data_blocks)@listData
-        data_blocks <- lapply(data_blocks, t) # need samples x features
-        data_blocks <- lapply(data_blocks, data.frame, check.names = FALSE)
-
-        # If no metadata supplied, attempt to extract it from the MAE object
-        if (is.null(metadata)) {
-            # Convert metadata
-            metadata <-
-              data.frame(MultiAssayExperiment::colData(data_blocks_mae))
-            if (length(metadata) == 0) {
-                metadata <- NULL
-            }
-        }
-    } else if (is(data_blocks, "list")) {
+    # Check is input type is a list
+    if (is(data_blocks, "list")) {
         # Transpose data blocks if in features x samples format:
         if (tolower(row_format) == "features") {
             data_blocks <- lapply(data_blocks, t)
         }
     } else {
         stop("Unknown input data format -
-             please use MultiAssayExperiment or a list of data blocks.")
+             please use a list of data blocks.")
     }
 
     num_blocks <- length(data_blocks)

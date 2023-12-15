@@ -8,7 +8,9 @@
 
 This package computes Multiple Co-Inertia Analysis (MCIA) on multi-block
 data using the Nonlinear Iterative Partial Least Squares (NIPALS)
-method.
+method.  
+It is a minimal version of the `nipalsMCIA` package developed for
+general purpose application of `nipalsMCIA` to a range of datasets.
 
 Features include:
 
@@ -21,6 +23,18 @@ Features include:
 - Streamlined and well-documented and supported code that is consistent
   with published theory to enable more efficient algorithm development
   and extension
+
+Major differences with the original `nipalsMCIA` implementation, in
+`nipalsMCIAminimal`:
+
+- The input is a list of tables in subject x feature format, in the
+  original package, the input is required to be an MAE object.
+- The output is a list, whereas the output is a class in the original
+  package.
+- There are no tutorials for use of the package for biological
+  applications.  
+  Please use the original package if you are interested applying the
+  algorithm to multi-omics data.
 
 **References**
 
@@ -47,8 +61,8 @@ You can install the development version of nipalsMCIA from
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("Muunraker/nipalsMCIA", ref = "code-development",
-                         force = TRUE, build_vignettes = TRUE)
+devtools::install_github("Muunraker/nipalsMCIAminimal", ref = "master",
+                         force = TRUE, build_vignettes = FALSE)
 ```
 
 ## Basic Example
@@ -61,7 +75,7 @@ frame containing the cancer type associated with each cell line.
 
 ``` r
 # load the package and set a seed for reproducibility
-library(nipalsMCIA)
+library(nipalsMCIAminimal)
 set.seed(42)
 ```
 
@@ -83,7 +97,7 @@ head(metadata_NCI60)
 #> CNS.SNB_75        CNS
 #> CNS.U251          CNS
 table(metadata_NCI60)
-#> metadata_NCI60
+#> cancerType
 #>      CNS Leukemia Melanoma 
 #>        6        6        9
 ```
@@ -97,7 +111,7 @@ The main MCIA function can be called on `data_blocks` and optionally can
 include `metadata_NCI60` for plot coloring by cancer type:
 
 ``` r
-mcia_results <- nipals_multiblock(data_blocks, preproc_method = 'colprofile',
+mcia_results <- nipals_multiblock(data_blocks, col_preproc_method = 'colprofile',
                                   metadata = metadata_NCI60,
                                   color_col = "cancerType", 
                                   num_PCs = 10, tol = 1e-12)
