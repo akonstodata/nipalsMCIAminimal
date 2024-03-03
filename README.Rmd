@@ -65,7 +65,7 @@ You can install the development version of nipalsMCIA from [GitHub](https://gith
 
 ```{r installation, echo = TRUE, results = 'hide', message = FALSE, eval = FALSE}
 # install.packages("devtools")
-devtools::install_github("Muunraker/nipalsMCIAminimal", ref = "master",
+devtools::install_github("akonstodata/nipalsMCIAminimal", ref = "master",
                          force = TRUE, build_vignettes = FALSE)
 ```
 
